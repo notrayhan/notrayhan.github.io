@@ -1,0 +1,80 @@
+body {
+  background-color: #222;
+  color: #eee;
+  font-family: Inter;
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+  margin: 0; /* Reset default body margin */
+}
+
+h1 {
+  color: #eee; 
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+  display: inline-block; /* Ensures transform works correctly */
+}
+
+h1:hover {
+  color: #5c0672;
+  transform: scale(1.1);
+}
+
+
+
+main {
+  animation: fadeInSlideUp 0.8s ease-out forwards;
+}
+
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.content-wrapper {
+    text-align: center; /* Center the text within the wrapper */
+}
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); 
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);   
+  }
+}
+
+.social-links {
+  display: flex;
+  justify-content: center; /* Center the icons horizontally */
+  align-items: center; /* Vertically align items */
+  margin-top: 1rem; /* Add some space between the content and the icons */
+}
+
+.social-links a {
+  margin: 0 0.5rem; /* Add spacing between the icons */
+}
+
+.social-links svg {
+  width: 30px; /* Adjust the size as needed */
+  height: 30px;
+  fill: #eee; /* Set the icon color for Font Awesome */
+  transition: transform 0.2s ease-in-out, fill 0.2s ease-in-out; /* Add a smooth transition for hover effect */
+}
+
+.social-links a:hover svg {
+  transform: scale(1.1); /* Slightly enlarge the icon on hover */
+  fill: #5c0672; /* Change color on hover */
+}
+
+.flag {
+  height: 1em; /* Match the height of the surrounding text */
+  width: auto;
+  vertical-align: -0.1em; /* Adjust vertical alignment */
+  margin-left: 0.25em;
+}

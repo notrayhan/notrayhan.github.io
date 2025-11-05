@@ -1,3 +1,3 @@
-# A showcase of some personal projects
+# A showcase of some personal projects!
 
-## Stay tuned :)
+## Built using eleventy
