@@ -1,3 +1,3 @@
-# Rayhan's Homepage
+# A showcase of some personal projects
 
-# Stay tuned :)
+## Stay tuned :)
