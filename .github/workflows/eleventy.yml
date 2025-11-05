@@ -23,7 +23,7 @@ jobs:
 
       - name: Build Eleventy 
         # IMPORTANT: Add your pathPrefix here!
-        run: npx @11ty/eleventy --pathprefix=/your-repo-name
+        run: npx @11ty/eleventy --pathprefix=/notrayhan.github.io
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
