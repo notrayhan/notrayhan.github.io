@@ -15,15 +15,14 @@ jobs:
       - name: Setup Node.js 
         uses: actions/setup-node@v4
         with:
-          node-version: '18' # Or 20
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies 
         run: npm install
 
       - name: Build Eleventy 
-        # IMPORTANT: Add your pathPrefix here!
-        run: npx @11ty/eleventy --pathprefix=/notrayhan.github.io
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
