@@ -18,22 +18,27 @@ document.addEventListener('DOMContentLoaded', () => {
     handleStickyHeader(); // Call once on load to set initial state
   }
 
-  // --- Content Fade-in on Scroll ---
+  let lastY = 0; // To keep track of scroll direction
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
+        // Determine scroll direction
+        const currentY = window.scrollY;
+        const isScrollingDown = currentY > lastY;
+        lastY = currentY;
+
         if (entry.isIntersecting) {
           // Element is entering the viewport
           entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target); // Stop observing once it's visible
         } else {
-          // Optional: remove class if you want the animation to re-trigger on scroll up
+          // Element is leaving the viewport
           entry.target.classList.remove('is-visible');
         }
       });
     },
     {
-      threshold: 0.1, // Trigger when 10% of the element is visible
+      threshold: 0.1, 
     }
   );
 
@@ -62,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         indicator.style.transform = `translateX(${e.target.offsetLeft}px)`;
       } else {
         // Desktop: Vertical indicator
+        indicator.style.width = '2px'; // Ensure width is correct for desktop
         const tabHeight = e.target.offsetHeight;
         const tabIndex = Array.from(tabs).indexOf(e.target);
         indicator.style.transform = `translateY(${tabIndex * tabHeight}px)`;
@@ -73,22 +79,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Resize handler for job tabs indicator ---
-  function handleResize() {
-    const activeTab = document.querySelector('.job-tab.active');
-    if (!activeTab) return;
-
-    const indicator = document.querySelector('.tab-indicator');
-    if (window.innerWidth <= 768) {
-      indicator.style.width = `${activeTab.offsetWidth}px`;
-      indicator.style.transform = `translateX(${activeTab.offsetLeft}px)`;
-    } else {
-      const tabs = document.querySelectorAll('.job-tab');
-      const tabIndex = Array.from(tabs).indexOf(activeTab);
-      indicator.style.width = '2px'; // Reset width for desktop
-      indicator.style.transform = `translateY(${tabIndex * activeTab.offsetHeight}px)`;
-    }
-  }
-
-  window.addEventListener('resize', handleResize);
 });
