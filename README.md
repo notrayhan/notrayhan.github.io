@@ -1,3 +1,3 @@
-# A personal website
+# a personal website
 
-## Built using eleventy
+## built using eleventy
