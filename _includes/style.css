@@ -1,3 +1,14 @@
+/* --- CSS Custom Properties (Variables) --- */
+:root {
+  --bg-color: #222;
+  --text-color: #eee;
+  --primary-color: #8d67f5;
+  --border-color: #444;
+  --text-muted-color: #aaa;
+  --card-bg-color: #2a2a2a;
+  --hover-bg-color: #333;
+}
+
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -28,8 +39,8 @@ html {
 }
 
 body {
-  background-color: #222;
-  color: #eee;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: 'Inter';
   line-height: 1.6;
   margin: 0;
@@ -38,23 +49,21 @@ body {
 }
 
 h1 {
-  color: #eee; 
+  color: var(--text-color); 
   transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
   display: inline-block; /* Ensures transform works correctly */
 }
 
 h1:hover {
-  color: #8d67f5;
+  color: var(--primary-color);
   transform: scale(1.1);
 }
 
 
-/* Elements start invisible and are animated in by JS */
-main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-header {
+/* Elements that will be animated in should start invisible */
+.content-wrapper > *, #main-header {
   opacity: 0;
-  /* Initial transform is handled by the fadeInSlideUp animation's 'from' state */
 }
-
 
 .content {
   max-width: 800px;
@@ -80,9 +89,12 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 }
 
 /* This class is added by JS to trigger the "in" animation using the keyframes */
-.is-visible main,
-.is-visible .content-wrapper {
+.is-visible .content-wrapper > * {
   animation: fadeInSlideUp 0.8s ease-out forwards;
+}
+
+.is-visible .bio {
+  animation-delay: 0.2s; /* Delay for bio */
 }
 
 /* Apply fadeInSlideUp to social links with a delay when visible */
@@ -90,10 +102,6 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
   animation: fadeInSlideUp 0.8s ease-out 0.4s forwards; /* Re-introducing the delay */
 }
 
-/* Ensure social links are initially hidden before animation */
-.social-links {
-  opacity: 0;
-}
 
 .social-links {
   display: flex;
@@ -109,13 +117,13 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 .social-links svg {
   width: 30px; /* Adjust the size as needed */
   height: 30px;
-  fill: #eee; /* Set the icon color for Font Awesome */
+  fill: var(--text-color); /* Set the icon color for Font Awesome */
   transition: transform 0.2s ease-in-out, fill 0.2s ease-in-out; /* Add a smooth transition for hover effect */
 }
 
 .social-links a:hover svg {
   transform: scale(1.1); /* Slightly enlarge the icon on hover */
-  fill: #8d67f5; /* Change color on hover */
+  fill: var(--primary-color); /* Change color on hover */
 }
 
 .flag {
@@ -125,18 +133,15 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
   margin-left: 0.25em;
 }
 
-/* New styles for full-page sections */
+/* Styles for full-page sections */
 .full-page {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  /* Align content to the top */
   align-items: flex-start;
-  /* Push the content down from the top. Adjust this value as needed. */
   padding-top: 30vh;
 }
 
-/* Position the experience and projects pages higher up */
 #page-2,
 #page-3 {
   padding-top: 15vh; /* Use a smaller value to move content up */
@@ -144,12 +149,10 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 
 /* Header Styles */
 #main-header {
-  /* The initial top margin is now handled by the body's padding-top */
   width: 100%;
-  padding: 1rem 0; /* Always have padding */
+  padding: 1rem 0;
   transition: all 0.6s ease-in-out;
-  /* Animate the header on page load, independent of scroll position */
-  animation: fadeInSlideUp 0.8s ease-out 0.6s forwards;
+  animation: fadeInSlideUp 0.8s ease-out 0.4s forwards;
   background-color: rgba(34, 34, 34, 0.9); /* Semi-transparent background */
   backdrop-filter: blur(10px); /* Frosted glass effect */
 }
@@ -164,7 +167,7 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 }
 
 #main-header nav a {
-  color: #eee;
+  color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
   display: inline-block; /* Allow the element to be transformed */
@@ -174,7 +177,7 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 
 #main-header nav a:hover {
   transform: scale(1.1);
-  color: #8d67f5;
+  color: var(--primary-color);
 }
 
 /* Sticky Header State */
@@ -189,6 +192,10 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 /* --- Section Styles --- */
 .section-title {
   margin-bottom: 4rem; /* Adjust this value to increase/decrease space */
+}
+
+.is-visible .jobs-container {
+  animation-delay: 0.2s;
 }
 
 .jobs-container {
@@ -209,7 +216,7 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 .job-tab {
   background: none;
   border: none;
-  border-left: 2px solid #444; /* Default line color */
+  border-left: 2px solid var(--border-color); /* Default line color */
   padding: 0.75rem 1.5rem;
   color: #aaa;
   cursor: pointer;
@@ -222,13 +229,13 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 }
 
 .job-tab:hover {
-  background-color: #333;
-  color: #8d67f5;
+  background-color: var(--hover-bg-color);
+  color: var(--primary-color);
 }
 
 .job-tab.active {
-  /* On mobile, the indicator will act as the bottom border */
-  border-bottom-color: #8d67f5;
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color); /* On mobile, the indicator will act as the bottom border */
 }
 
 .tab-indicator {
@@ -236,8 +243,8 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
   left: 0;
   top: 0;
   width: 2px;
-  height: 46px; /* Should match the height of a tab button */
-  background-color: #8d67f5;
+  height: 46px; /* Should match the height of a tab button */ /* TODO: Make this dynamic or use a CSS variable */
+  background-color: var(--primary-color);
   transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
@@ -280,7 +287,7 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 }
 
 .job-panel .job-period {
-  color: #aaa;
+  color: var(--text-muted-color);
   margin-top: 0;
   margin-bottom: 1.5rem;
   font-weight: 200;
@@ -292,10 +299,14 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 }
 
 .job-panel ul li::marker {
-  color: #8d67f5;
+  color: var(--primary-color);
 }
 
 /* --- Projects Section Styles --- */
+.is-visible .projects-grid {
+  animation-delay: 0.2s;
+}
+
 .projects-grid {
   display: flex; /* Use Flexbox for better centering */
   justify-content: center; /* Center the items horizontally */
@@ -308,11 +319,11 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 .project-card-link {
   flex-basis: 300px; /* Set a base width for the card */
   text-decoration: none;
-  color: inherit;
+  color: var(--text-color);
 }
 
 .project-card {
-  background-color: #2a2a2a; /* A slightly lighter dark color */
+  background-color: var(--card-bg-color);
   border-radius: 8px;
   overflow: hidden; /* To keep the image corners rounded */
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -365,7 +376,7 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
   .job-tabs {
     flex-direction: row; /* Arrange tabs horizontally */
     overflow-x: auto;   /* Allow horizontal scrolling for tabs if they overflow */
-    border-left: none;
+    border-left: none; /* Remove the vertical border on mobile */
     /* Remove the grey bottom border */
     /* border-bottom: 2px solid #444; */
   }

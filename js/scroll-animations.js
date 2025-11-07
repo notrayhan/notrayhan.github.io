@@ -76,4 +76,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Resize handler for job tabs indicator ---
+  function handleResize() {
+    const activeTab = document.querySelector('.job-tab.active');
+    if (!activeTab) return;
+
+    const indicator = document.querySelector('.tab-indicator');
+    if (window.innerWidth <= 768) {
+      // Mobile: Horizontal indicator
+      indicator.style.width = `${activeTab.offsetWidth}px`;
+      indicator.style.transform = `translateX(${activeTab.offsetLeft}px)`;
+    } else {
+      // Desktop: Vertical indicator
+      const tabs = document.querySelectorAll('.job-tab');
+      const tabIndex = Array.from(tabs).indexOf(activeTab);
+      indicator.style.width = '2px'; // Reset width for desktop
+      indicator.style.transform = `translateY(${tabIndex * activeTab.offsetHeight}px)`;
+    }
+  }
+
+  window.addEventListener('resize', handleResize);
+  handleResize(); // Call on load to set initial indicator state correctly
 });

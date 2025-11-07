@@ -5,11 +5,13 @@ layout: base.njk
 
 <main>
   <div class="content-wrapper">
-    <div class="content">
-      <h1>rayhan irfan</h1>
-      <p>computer science and software engineering student @ university of washington, bothell
+    <div class="name">
+      <h1 class="delay-1">rayhan irfan</h1>
+    </div>
+    <div class="bio">
+      <p class="delay-2">computer science and software engineering student @ university of washington, bothell
       </p>
-      <img src="/img/indonesia.svg" alt="Indonesian Flag" class="flag">
+      <img src="/img/indonesia.svg" alt="Indonesian Flag" class="flag delay-3">
     </div>
     <div class="social-links">
         <a href="https://github.com/notrayhan" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
