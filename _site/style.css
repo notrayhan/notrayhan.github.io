@@ -246,6 +246,12 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
   color: #8d67f5;
 }
 
+.job-tab.active {
+  color: #8d67f5;
+  /* On mobile, the indicator will act as the bottom border */
+  border-bottom-color: #8d67f5;
+}
+
 .tab-indicator {
   position: absolute;
   left: 0;
@@ -381,11 +387,20 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
     flex-direction: row; /* Arrange tabs horizontally */
     overflow-x: auto;   /* Allow horizontal scrolling for tabs if they overflow */
     border-left: none;
+    /* Remove the grey bottom border */
+    /* border-bottom: 2px solid #444; */
   }
 
   .job-tab {
     border-left: none;
-    border-bottom: 2px solid transparent; /* Prepare for active state */
-    margin-bottom: -2px; /* Align with the container's bottom border */
+    border-bottom: 2px solid transparent;
+    margin-bottom: 0;
+  }
+
+  .tab-indicator {
+    top: auto; /* Unset the top position */
+    bottom: 0; /* Position at the bottom of the tabs container */
+    height: 2px; /* Make it a thin line */
+    /* The width will be set by JavaScript */
   }
 }
