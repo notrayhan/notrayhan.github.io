@@ -29,14 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (entry.isIntersecting) {
           // Element is entering the viewport
-          // Always add 'is-visible' when an element is in view.
-          // The animation itself is controlled by CSS and won't re-run if the class is already present.
           entry.target.classList.add('is-visible');
+
+          // On mobile, unobserve the element after it's visible to ensure the animation only runs once.
+          if (window.innerWidth <= 768) {
+            observer.unobserve(entry.target);
+          }
         } else {
-          // Element is leaving the viewport.
-          // On mobile, only remove the class if scrolling up past it.
-          // This resets it for the next scroll-down animation.
-          if (window.innerWidth > 768 || !isScrollingDown) {
+          // On desktop, remove the class when it leaves the viewport to allow re-animation.
+          if (window.innerWidth > 768) {
             entry.target.classList.remove('is-visible');
           }
         }
