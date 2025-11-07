@@ -29,18 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (entry.isIntersecting) {
           // Element is entering the viewport
-          if (window.innerWidth <= 768) { // Mobile-specific behavior
-            if (isScrollingDown) {
-              entry.target.classList.add('is-visible');
-            } else {
-              // If scrolling up and element enters, ensure it's not visible to prevent animation
-              entry.target.classList.remove('is-visible');
-            }
-          } else { // Desktop behavior
+          // On desktop, or when scrolling down on mobile, add the class.
+          if (window.innerWidth > 768 || isScrollingDown) {
             entry.target.classList.add('is-visible');
           }
         } else {
-          // Element is leaving the viewport, always remove 'is-visible'
+          // Element is leaving the viewport.
+          // Always remove the class so it can be re-animated on the next scroll-down.
           entry.target.classList.remove('is-visible');
         }
       });
