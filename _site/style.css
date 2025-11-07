@@ -79,17 +79,6 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
   }
 }
 
-@keyframes slideUpAndFadeOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-40px); /* Animate upwards */
-  }
-}
-
 /* This class is added by JS to trigger the "in" animation using the keyframes */
 .is-visible main,
 .is-visible .content-wrapper {
@@ -105,7 +94,6 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 .social-links {
   opacity: 0;
 }
-
 
 .social-links {
   display: flex;
@@ -145,13 +133,13 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
   /* Align content to the top */
   align-items: flex-start;
   /* Push the content down from the top. Adjust this value as needed. */
-  padding-top: 20vh;
+  padding-top: 30vh;
 }
 
 /* Position the experience and projects pages higher up */
 #page-2,
 #page-3 {
-  padding-top: 13vh; /* Use a smaller value to move content up */
+  padding-top: 15vh; /* Use a smaller value to move content up */
 }
 
 /* Header Styles */
@@ -239,11 +227,6 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 }
 
 .job-tab.active {
-  color: #8d67f5;
-}
-
-.job-tab.active {
-  color: #8d67f5;
   /* On mobile, the indicator will act as the bottom border */
   border-bottom-color: #8d67f5;
 }
