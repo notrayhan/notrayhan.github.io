@@ -1,9 +1,11 @@
 module.exports = function(eleventyConfig) {
-  // This line copies the file to the output directory
+  // Consolidate all passthrough copies into a single object
   eleventyConfig.addPassthroughCopy({
-    "_includes/style.css": "./style.css" 
+    "_includes/style.css": "./style.css",
+    "img": "./img",
+    "fonts": "./fonts",
+    "js": "./js"
   });
+
   eleventyConfig.addWatchTarget("_includes/style.css");
-  eleventyConfig.addPassthroughCopy("img");
-  eleventyConfig.addPassthroughCopy("fonts");
 };

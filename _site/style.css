@@ -14,16 +14,27 @@
   src: url('/fonts/inter-v20-latin-700.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200; 
+  font-display: swap;
+  src: url('/fonts/inter-v20-latin-200.woff2') format('woff2');
+}
+
+html {
+  /* Enables smooth scrolling when clicking anchor links */
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #222;
   color: #eee;
   font-family: 'Inter';
   line-height: 1.6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* Ensure it covers the full viewport height */
-  margin: 0; /* Reset default body margin */
+  margin: 0;
+  padding: 0; /* Initial padding is 0 */
+  
 }
 
 h1 {
@@ -33,14 +44,15 @@ h1 {
 }
 
 h1:hover {
-  color: #5c0672;
+  color: #8d67f5;
   transform: scale(1.1);
 }
 
 
-
-main {
-  animation: fadeInSlideUp 0.8s ease-out forwards;
+/* Elements start invisible and are animated in by JS */
+main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-header {
+  opacity: 0;
+  /* Initial transform is handled by the fadeInSlideUp animation's 'from' state */
 }
 
 
@@ -52,6 +64,8 @@ main {
 
 .content-wrapper {
     text-align: center; /* Center the text within the wrapper */
+    margin-top: 0;
+    padding-top: 0;
 }
 
 @keyframes fadeInSlideUp {
@@ -63,6 +77,38 @@ main {
     opacity: 1;
     transform: translateY(0);   
   }
+}
+
+@keyframes slideUpAndFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-40px); /* Animate upwards */
+  }
+}
+
+/* This class is added by JS to trigger the "in" animation using the keyframes */
+.is-visible main,
+.is-visible .content-wrapper {
+  animation: fadeInSlideUp 0.8s ease-out forwards;
+}
+
+/* Apply fadeInSlideUp to social links with a delay when visible */
+.is-visible .social-links {
+  animation: fadeInSlideUp 0.8s ease-out 0.4s forwards; /* Re-introducing the delay */
+}
+
+/* Ensure social links are initially hidden before animation */
+.social-links {
+  opacity: 0;
+}
+
+/* This class is added by JS to trigger the "out" animation */
+.is-leaving {
+  animation: slideUpAndFadeOut 0.8s ease-out forwards;
 }
 
 .social-links {
@@ -85,7 +131,7 @@ main {
 
 .social-links a:hover svg {
   transform: scale(1.1); /* Slightly enlarge the icon on hover */
-  fill: #5c0672; /* Change color on hover */
+  fill: #8d67f5; /* Change color on hover */
 }
 
 .flag {
@@ -93,4 +139,216 @@ main {
   width: auto;
   vertical-align: -0.1em; /* Adjust vertical alignment */
   margin-left: 0.25em;
+}
+
+/* New styles for full-page sections */
+.full-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  /* Align content to the top */
+  align-items: flex-start;
+  /* Push the content down from the top. Adjust this value as needed. */
+  padding-top: 20vh;
+}
+
+/* Position the experience and projects pages higher up */
+#page-2,
+#page-3 {
+  padding-top: 13vh; /* Use a smaller value to move content up */
+}
+
+/* Header Styles */
+#main-header {
+  /* The initial top margin is now handled by the body's padding-top */
+  width: 100%;
+  padding: 1rem 0; /* Always have padding */
+  transition: all 0.6s ease-in-out;
+  /* Animate the header on page load, independent of scroll position */
+  animation: fadeInSlideUp 0.8s ease-out 0.6s forwards;
+  background-color: rgba(34, 34, 34, 0.9); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+}
+
+#main-header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+#main-header nav a {
+  color: #eee;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block; /* Allow the element to be transformed */
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out; /* Add transform to the transition */
+}
+
+
+#main-header nav a:hover {
+  transform: scale(1.1);
+  color: #8d67f5;
+}
+
+/* Sticky Header State */
+.sticky {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background-color: rgba(34, 34, 34, 0.9); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px);
+  /* Add padding back to the header to cover the full area */
+  padding: 1rem 0;
+  margin-top: 0;
+  z-index: 1000;
+}
+
+/* --- Experience Section Styles --- */
+.section-title {
+  margin-bottom: 4rem; /* Adjust this value to increase/decrease space */
+}
+
+.jobs-container {
+  display: flex;
+  gap: 2rem;
+  min-height: 300px; /* Give it a minimum height */
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.job-tabs {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.job-tab {
+  background: none;
+  border: none;
+  border-left: 2px solid #444; /* Default line color */
+  padding: 0.75rem 1.5rem;
+  color: #aaa;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 200; /* Apply the lighter font weight */
+  font-size: 1rem;
+  text-align: left;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
+.job-tab:hover {
+  background-color: #333;
+  color: #8d67f5;
+}
+
+.job-tab.active {
+  color: #8d67f5;
+}
+
+.tab-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 46px; /* Should match the height of a tab button */
+  background-color: #8d67f5;
+  transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.job-panels {
+  position: relative;
+}
+
+.job-panel {
+  display: none; /* Hide all panels by default */
+  animation: fadeInSlideUp 0.5s ease-out;
+}
+
+.job-panel.active {
+  display: block; /* Show only the active panel */
+}
+
+.job-panel h3 {
+  margin-top: 0;
+  margin-bottom: 0.25rem; /* Control the space below the title */
+  font-size: 1.25rem;
+}
+
+.job-company-logo {
+  width: auto;
+  vertical-align: middle; /* Align the logo vertically with the text */
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.uw-logo {
+  height: 1.0em; /* Adjust size for the UW logo */
+}
+
+.cwk-logo {
+  height: 1.6em; /* Adjust size for the Coding with Kids logo */
+}
+
+.job-company-logo:hover {
+  transform: scale(1.1);
+}
+
+.job-panel .job-period {
+  color: #aaa;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-weight: 200;
+  font-size: 0.8rem; 
+}
+
+.job-panel ul {
+  padding-left: 1.25rem;
+}
+
+.job-panel ul li::marker {
+  color: #8d67f5;
+}
+
+/* --- Projects Section Styles --- */
+.projects-grid {
+  display: flex; /* Use Flexbox for better centering */
+  justify-content: center; /* Center the items horizontally */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 1.5rem;
+  max-width: 700px; /* Adjust as needed */
+  margin: 0 auto;
+}
+
+.project-card-link {
+  flex-basis: 300px; /* Set a base width for the card */
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card {
+  background-color: #2a2a2a; /* A slightly lighter dark color */
+  border-radius: 8px;
+  overflow: hidden; /* To keep the image corners rounded */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  height: 100%;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-image {
+  width: 100%;
+  height: 200px; /* Adjust the height of the image as needed */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.project-content {
+  padding: 1.5rem;
 }
