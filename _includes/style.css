@@ -197,16 +197,12 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 .sticky {
   position: fixed;
   top: 0; left: 0; right: 0;
-  background-color: rgba(34, 34, 34, 0.9); /* Semi-transparent background */
-  backdrop-filter: blur(10px); /* Frosted glass effect */
-  -webkit-backdrop-filter: blur(10px);
-  /* Add padding back to the header to cover the full area */
   padding: 1rem 0;
   margin-top: 0;
   z-index: 1000;
 }
 
-/* --- Experience Section Styles --- */
+/* --- Section Styles --- */
 .section-title {
   margin-bottom: 4rem; /* Adjust this value to increase/decrease space */
 }
@@ -351,4 +347,46 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 
 .project-content {
   padding: 1.5rem;
+}
+
+/* --- Responsive Styles for Mobile --- */
+@media (max-width: 768px) {
+  .content {
+    padding: 1rem;
+  }
+
+  /* Reduce top padding on mobile for all pages */
+  .full-page,
+  #page-2,
+  #page-3 {
+    padding-top: 15vh;
+  }
+
+  /* Adjust header navigation for smaller screens */
+  #main-header nav ul {
+    gap: 1.5rem;
+  }
+
+  #main-header nav a {
+    font-size: 0.9rem;
+  }
+
+  /* Stack the jobs section vertically on mobile */
+  .jobs-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .job-tabs {
+    flex-direction: row; /* Arrange tabs horizontally */
+    overflow-x: auto;   /* Allow horizontal scrolling for tabs if they overflow */
+    border-left: none;
+    border-bottom: 2px solid #444; /* Move border to the bottom */
+  }
+
+  .job-tab {
+    border-left: none;
+    border-bottom: 2px solid transparent; /* Prepare for active state */
+    margin-bottom: -2px; /* Align with the container's bottom border */
+  }
 }

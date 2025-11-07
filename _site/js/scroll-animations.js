@@ -3,28 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.getElementById('main-header');
 
   if (header) {
-    let headerHeight = 0;
+    const headerHeight = header.offsetHeight; // Get the header's height
 
-    // Recalculate the sticky point after animations have finished
-    setTimeout(() => {
-      // Get the full height of the header
-      const headerStyles = window.getComputedStyle(header);
-      headerHeight = header.offsetHeight; // header has padding, not margin-top now
-
-      function handleStickyHeader() {
-        if (window.scrollY > 0) {
-          header.classList.add('sticky');
-          document.body.style.paddingTop = `${headerHeight}px`;
-        } else {
-          header.classList.remove('sticky');
-          document.body.style.paddingTop = '0';
-        }
+    function handleStickyHeader() {
+      if (window.scrollY > 0) {
+        header.classList.add('sticky');
+        document.body.style.paddingTop = `${headerHeight}px`;
+      } else {
+        header.classList.remove('sticky');
+        document.body.style.paddingTop = '0';
       }
-
-      window.addEventListener('scroll', handleStickyHeader);
-      // Call once on load to set initial state if already scrolled (e.g., after refresh)
-      handleStickyHeader();
-    }, 1500); // 1500ms = 1.5s, safely after the header animation (0.6s + 0.8s)
+    }
+    window.addEventListener('scroll', handleStickyHeader);
+    handleStickyHeader(); // Call once on load to set initial state
   }
 
   let lastY = 0; // To keep track of scroll direction
