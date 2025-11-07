@@ -1,0 +1,29 @@
+[
+  {
+    "id": "job-1",
+    "company": "UW Bothell",
+    "logo": "/img/uw.svg",
+    "logoClass": "uw-logo",
+    "link": "https://www.uwb.edu/",
+    "position": "lead tutor + peer facilitator",
+    "period": "sept 2024 - current",
+    "description": [
+      "work with professors to assist peers in the classroom",
+      "tutor @ the quantitative skills center in STEM subjects: computer science, calculus, etc",
+      "mentor new tutors on best practices and fostering a growth mindset"
+    ]
+  },
+  {
+    "id": "job-2",
+    "company": "coding with kids",
+    "logo": "/img/cwk.png",
+    "logoClass": "cwk-logo",
+    "link": "https://www.codingwithkids.com/",
+    "position": "instructor",
+    "period": "march 2023 - oct 2025",
+    "description": [
+      "taught programming fundamentals to students aged 5-18 using scratch, python, and java",
+      "managed classroom dynamics and adapted curriculum to different skill levels"
+    ]
+  }
+]
