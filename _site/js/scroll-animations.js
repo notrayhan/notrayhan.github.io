@@ -18,21 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
     handleStickyHeader(); // Call once on load to set initial state
   }
 
-  let lastY = 0; // To keep track of scroll direction
-
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        // Determine scroll direction
-        const currentY = window.scrollY;
-        const isScrollingDown = currentY > lastY;
-        lastY = currentY;
-
         if (entry.isIntersecting) {
           // Element is entering the viewport
           entry.target.classList.add('is-visible');
+          // On mobile, unobserve after first animation to prevent re-triggering
+          if (window.innerWidth <= 768) {
+            observer.unobserve(entry.target);
+          }
         } else {
-          // Element is leaving the viewport
+          // On desktop, remove the class so it can animate again on scroll-up
           entry.target.classList.remove('is-visible');
         }
       });
