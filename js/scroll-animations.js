@@ -18,32 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
     handleStickyHeader(); // Call once on load to set initial state
   }
 
-  let lastY = 0; // To keep track of scroll direction
-
+  // --- Content Fade-in on Scroll ---
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        // Determine scroll direction
-        const currentY = window.scrollY;
-        const isScrollingDown = currentY > lastY;
-        lastY = currentY;
-
         if (entry.isIntersecting) {
           // Element is entering the viewport
           entry.target.classList.add('is-visible');
-          entry.target.classList.remove('is-leaving');
+          observer.unobserve(entry.target); // Stop observing once it's visible
         } else {
-          // Element is leaving the viewport
-          // Only apply the "leaving" animation when scrolling down
-          if (isScrollingDown) {
-            entry.target.classList.add('is-leaving');
-          }
+          // Optional: remove class if you want the animation to re-trigger on scroll up
           entry.target.classList.remove('is-visible');
         }
       });
     },
     {
-      threshold: 0.1, 
+      threshold: 0.1, // Trigger when 10% of the element is visible
     }
   );
 

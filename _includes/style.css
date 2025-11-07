@@ -79,17 +79,6 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
   }
 }
 
-@keyframes slideUpAndFadeOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-40px); /* Animate upwards */
-  }
-}
-
 /* This class is added by JS to trigger the "in" animation using the keyframes */
 .is-visible main,
 .is-visible .content-wrapper {
@@ -104,11 +93,6 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
 /* Ensure social links are initially hidden before animation */
 .social-links {
   opacity: 0;
-}
-
-/* This class is added by JS to trigger the "out" animation */
-.is-leaving {
-  animation: slideUpAndFadeOut 0.8s ease-out forwards;
 }
 
 .social-links {
