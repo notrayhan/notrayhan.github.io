@@ -381,7 +381,6 @@ main, #page-2 .content-wrapper, #page-3 .content-wrapper, .social-links, #main-h
     flex-direction: row; /* Arrange tabs horizontally */
     overflow-x: auto;   /* Allow horizontal scrolling for tabs if they overflow */
     border-left: none;
-    border-bottom: 2px solid #444; /* Move border to the bottom */
   }
 
   .job-tab {
